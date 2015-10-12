@@ -8,7 +8,7 @@ RUN yum install -y cmake
 RUN yum install -y fftw3-devel
 RUN yum install -y gsl-devel
 RUN yum install -y gcc-c++
-
+RUN yum install -y numpy
 
 ENV CXX c++
 
