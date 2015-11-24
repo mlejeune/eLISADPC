@@ -10,7 +10,7 @@ RUN yum install -y gsl-devel
 RUN yum install -y gcc-c++
 RUN yum install -y numpy
 RUN yum install -y rpm-build
-
+RUN yum install -y boost boost-devel boost-doc
 ENV CXX c++
 
 
