@@ -16,13 +16,12 @@ Some tools and libraries are installed to deal with codes already integrated in 
 3. cmake
 4. gcc-c++
 5. numpy 
-6. boost boost-devel boost-doc
 
 **Libraries**
 
 1. fftw3
 2. gsl
-
+3. boost boost-devel boost-doc
 
 
 ####How to use
