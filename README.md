@@ -16,6 +16,7 @@ Some tools and libraries are installed to deal with codes already integrated in 
 3. cmake
 4. gcc-c++
 5. numpy 
+6. boost boost-devel boost-doc
 
 **Libraries**
 
