@@ -11,6 +11,11 @@ RUN yum install -y gcc-c++
 RUN yum install -y numpy
 RUN yum install -y rpm-build
 RUN yum install -y boost boost-devel boost-doc
+RUN yum install -y wget
+RUN yum install -y epel-release
+RUN yum install -y lcov
+RUN yum install -y python-pip
+RUN pip intall gcovr
 ENV CXX c++
 
 
