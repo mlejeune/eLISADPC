@@ -15,7 +15,7 @@ RUN yum install -y wget
 RUN yum install -y epel-release
 RUN yum install -y lcov
 RUN yum install -y python-pip
-RUN pip intall gcovr
+RUN pip install gcovr
 ENV CXX c++
 
 
