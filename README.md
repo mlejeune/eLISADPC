@@ -28,11 +28,11 @@ Some tools and libraries are installed to deal with codes already integrated in 
 
 To use the image you need [Docker](http://docker.io) installed on your system. Once installed Docker, you have to download the image from Docker Hub using the following command:
 
-	docker pull gabrimaine/elisadpc
+	docker pull elisadpc/elisadpc
 	
 and then launch the image using the following command:
 
-	docker run -v /Local/dir:/Container/dir -it gabrimaine/elisadpc
+	docker run -v /Local/dir:/Container/dir -it elisadpc/elisadpc
 	
 
 This command launch the image and link a directory on your system (/Local/dir) with a directory within the image (/Container/dir, if the container dir doesn't exist, Docker will create it automatically). Once launched, you will be logged-in in the Centos image and you have all the tools to compile and test your code. 
