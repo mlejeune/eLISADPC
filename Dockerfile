@@ -15,8 +15,12 @@ RUN yum install -y wget
 RUN yum install -y epel-release
 RUN yum install -y lcov
 RUN yum install -y python-pip
+RUN yum install -y eigen3-devel glog-devel gflags-devel bc
+RUN yum install -y libtool
 RUN pip install gcovr
 ENV CXX c++
+RUN git clone https://github.com/beniz/libcmaes.git
+RUN cd libcmaes && ./autogen.sh && ./configure --prefix=/usr/local/libcmaes && make && make install
 
 
 
