@@ -35,7 +35,7 @@ RUN wget https://sourceforge.net/projects/swig/files/swig/swig-3.0.8/swig-3.0.8.
 RUN cd swig-3.0.8 && ./configure && make && make install
 
 # install LAL
-ENV LALDIR ${HOME}/Applications/LAL
+ENV LALDIR /root/Applications/LAL
 ENV LALSUITE_SRCDIR ${LALDIR}/src
 ENV LALSUITE_PREFIX ${LALDIR}/opt/lalsuite
 ENV LSCSOFT_PREFIX ${LALDIR}/opt/lscsoft
@@ -49,7 +49,6 @@ RUN mv lal-6.16.0 lalsuite
 RUN cd lalsuite && ./configure --prefix=${LALSUITE_PREFIX} --enable-swig-python && make && make install
 RUN source ${LALSUITE_PREFIX}/etc/lal-user-env.sh 
 
-ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:${LALSUITE_PREFIX}/lib/pkgconfig
 ENV PKG_CONFIG_PATH ${LALSUITE_PREFIX}/lib/pkgconfig
 
 ## lalsimulation
