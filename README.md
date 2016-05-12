@@ -22,7 +22,13 @@ Some tools and libraries are installed to deal with codes already integrated in 
 1. fftw3
 2. gsl
 3. boost boost-devel boost-doc
+4. hdf5
+5. swig
 
+**Specific libraries**
+
+1. CMAES
+2. LAL: lalsuite, lalsimulation
 
 ####How to use
 
