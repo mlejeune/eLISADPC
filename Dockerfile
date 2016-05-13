@@ -35,7 +35,7 @@ RUN wget https://sourceforge.net/projects/swig/files/swig/swig-3.0.8/swig-3.0.8.
 RUN cd swig-3.0.8 && ./configure && make && make install
 
 # install LAL
-ENV LALDIR /root/Applications/LAL
+ENV LALDIR /workspace/Applications/LAL
 ENV LALSUITE_SRCDIR ${LALDIR}/src
 ENV LALSUITE_PREFIX ${LALDIR}/opt/lalsuite
 ENV LSCSOFT_PREFIX ${LALDIR}/opt/lscsoft
@@ -43,7 +43,7 @@ ENV LSCSOFT_PREFIX ${LALDIR}/opt/lscsoft
 RUN mkdir -p ${LALSUITE_SRCDIR}
 RUN cd ${LALSUITE_SRCDIR}
 
-## lal
+## lalsuite
 RUN wget http://software.ligo.org/lscsoft/source/lalsuite/lal-6.16.0.tar.xz && tar xvfJ lal-6.16.0.tar.xz
 RUN mv lal-6.16.0 lalsuite
 RUN cd lalsuite && ./configure --prefix=${LALSUITE_PREFIX} --enable-swig-python && make && make install
@@ -55,6 +55,9 @@ ENV PKG_CONFIG_PATH ${LALSUITE_PREFIX}/lib/pkgconfig
 RUN wget http://software.ligo.org/lscsoft/source/lalsuite/lalsimulation-1.5.0.tar.xz && tar xvfJ lalsimulation-1.5.0.tar.xz
 RUN cd lalsimulation-1.5.0 && ./configure --prefix=$LSCSOFT_PREFIX && make && make install
 
-RUN mkdir /workspace
+## pylal
+RUN wget http://software.ligo.org/lscsoft/source/pylal-0.9.0.tar.gz && tar xvzf pylal-0.9.0.tar.gz
+RUN cd pylal-0.9.0 && ./configure --prefix=$LSCSOFT_PREFIX && make && make install
+
 WORKDIR /workspace
 RUN cd /workspace
