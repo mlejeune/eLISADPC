@@ -56,8 +56,8 @@ RUN wget http://software.ligo.org/lscsoft/source/lalsuite/lalsimulation-1.5.0.ta
 RUN cd lalsimulation-1.5.0 && ./configure --prefix=$LSCSOFT_PREFIX && make && make install
 
 ## pylal
-RUN wget http://software.ligo.org/lscsoft/source/pylal-0.9.0.tar.gz && tar xvzf pylal-0.9.0.tar.gz
-RUN cd pylal-0.9.0 && ./configure --prefix=$LSCSOFT_PREFIX && make && make install
+#RUN wget http://software.ligo.org/lscsoft/source/pylal-0.9.0.tar.gz && tar xvzf pylal-0.9.0.tar.gz
+#RUN cd pylal-0.9.0 && ./configure --prefix=$LSCSOFT_PREFIX && make && make install
 
 WORKDIR /workspace
 RUN cd /workspace
