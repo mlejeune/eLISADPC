@@ -2,19 +2,18 @@ FROM centos:latest
 MAINTAINER eLISA DPC ccavet@apc.in2p3.fr
 
 RUN yum -y update
+RUN yum install -y epel-release
 RUN yum install -y git 
 RUN yum install -y make
 RUN yum install -y cmake
 RUN yum install -y fftw3-devel
 RUN yum install -y gsl-devel
 RUN yum install -y gcc-c++
-RUN yum install -y python-ipython numpy
+RUN yum install -y python-pip python-ipython numpy
 RUN yum install -y rpm-build
 RUN yum install -y boost boost-devel boost-doc
-RUN yum install -y wget
-RUN yum install -y epel-release
+RUN yum install -y wget nano
 RUN yum install -y lcov
-RUN yum install -y python-pip
 RUN yum install -y eigen3-devel glog-devel gflags-devel bc
 RUN yum install -y libtool
 RUN yum install -y pygtk2-devel pcre-devel
@@ -41,6 +40,7 @@ ENV LALSUITE_PREFIX ${LALDIR}/opt/lalsuite
 ENV LSCSOFT_PREFIX ${LALDIR}/opt/lscsoft
 
 RUN mkdir -p ${LALSUITE_SRCDIR}
+WORKDIR ${LALSUITE_SRCDIR}
 RUN cd ${LALSUITE_SRCDIR}
 
 ## lalsuite
@@ -53,11 +53,9 @@ ENV PKG_CONFIG_PATH ${LALSUITE_PREFIX}/lib/pkgconfig
 
 ## lalsimulation
 RUN wget http://software.ligo.org/lscsoft/source/lalsuite/lalsimulation-1.5.0.tar.xz && tar xvfJ lalsimulation-1.5.0.tar.xz
-RUN cd lalsimulation-1.5.0 && ./configure --prefix=$LSCSOFT_PREFIX && make && make install
+RUN cd lalsimulation-1.5.0 && ./configure --prefix=$LSCSOFT_PREFIX/lalsimulation && make && make install
 
-## pylal
-#RUN wget http://software.ligo.org/lscsoft/source/pylal-0.9.0.tar.gz && tar xvzf pylal-0.9.0.tar.gz
-#RUN cd pylal-0.9.0 && ./configure --prefix=$LSCSOFT_PREFIX && make && make install
+ENV PKG_CONFIG_PATH ${PKG_CONFIG_PATH}:${LSCSOFT_PREFIX}/lalsimulation/lib/pkgconfig
 
 WORKDIR /workspace
 RUN cd /workspace
