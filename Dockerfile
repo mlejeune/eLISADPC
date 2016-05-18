@@ -47,15 +47,20 @@ RUN cd ${LALSUITE_SRCDIR}
 RUN wget http://software.ligo.org/lscsoft/source/lalsuite/lal-6.16.0.tar.xz && tar xvfJ lal-6.16.0.tar.xz
 RUN mv lal-6.16.0 lalsuite
 RUN cd lalsuite && ./configure --prefix=${LALSUITE_PREFIX} --enable-swig-python && make && make install
-RUN source ${LALSUITE_PREFIX}/etc/lal-user-env.sh 
 
-ENV PKG_CONFIG_PATH ${LALSUITE_PREFIX}/lib/pkgconfig
+RUN chmod +x ${LALSUITE_PREFIX}/etc/lal-user-env.sh 
+RUN ${LALSUITE_PREFIX}/etc/lal-user-env.sh 
+
+#ENV PKG_CONFIG_PATH ${LALSUITE_PREFIX}/lib/pkgconfig
 
 ## lalsimulation
 RUN wget http://software.ligo.org/lscsoft/source/lalsuite/lalsimulation-1.5.0.tar.xz && tar xvfJ lalsimulation-1.5.0.tar.xz
-RUN cd lalsimulation-1.5.0 && ./configure --prefix=$LSCSOFT_PREFIX/lalsimulation && make && make install
+RUN cd lalsimulation-1.5.0 && ./configure --prefix=$LSCSOFT_PREFIX/lalsimulation --enable-swig-python && make && make install
 
-ENV PKG_CONFIG_PATH ${PKG_CONFIG_PATH}:${LSCSOFT_PREFIX}/lalsimulation/lib/pkgconfig
+RUN chmod +x ${LSCSOFT_PREFIX}/lalsimulation/etc/lalsimulation-user-env.sh
+RUN ${LSCSOFT_PREFIX}/lalsimulation/etc/lalsimulation-user-env.sh
+
+#ENV PKG_CONFIG_PATH ${PKG_CONFIG_PATH}:${LSCSOFT_PREFIX}/lalsimulation/lib/pkgconfig
 
 WORKDIR /workspace
 RUN cd /workspace
