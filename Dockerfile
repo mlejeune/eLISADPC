@@ -22,6 +22,7 @@ RUN yum install -y hdf5 hdf5-devel
 RUN pip install --upgrade pip
 RUN pip install gcovr
 RUN pip install mkdocs
+RUN pip install h5py scipy
 
 ENV CXX c++
 
@@ -50,8 +51,9 @@ RUN cd lalsuite && ./configure --prefix=${LALSUITE_PREFIX} --enable-swig-python 
 
 RUN chmod +x ${LALSUITE_PREFIX}/etc/lal-user-env.sh 
 RUN ${LALSUITE_PREFIX}/etc/lal-user-env.sh 
+RUN echo $PYTHON_PATH
 
-#ENV PKG_CONFIG_PATH ${LALSUITE_PREFIX}/lib/pkgconfig
+ENV PKG_CONFIG_PATH ${LALSUITE_PREFIX}/lib/pkgconfig
 
 ## lalsimulation
 RUN wget http://software.ligo.org/lscsoft/source/lalsuite/lalsimulation-1.5.0.tar.xz && tar xvfJ lalsimulation-1.5.0.tar.xz
@@ -60,7 +62,11 @@ RUN cd lalsimulation-1.5.0 && ./configure --prefix=$LSCSOFT_PREFIX/lalsimulation
 RUN chmod +x ${LSCSOFT_PREFIX}/lalsimulation/etc/lalsimulation-user-env.sh
 RUN ${LSCSOFT_PREFIX}/lalsimulation/etc/lalsimulation-user-env.sh
 
-#ENV PKG_CONFIG_PATH ${PKG_CONFIG_PATH}:${LSCSOFT_PREFIX}/lalsimulation/lib/pkgconfig
+ENV PKG_CONFIG_PATH ${PKG_CONFIG_PATH}:${LSCSOFT_PREFIX}/lalsimulation/lib/pkgconfig
+
+## PyCBC
+RUN git clone https://github.com/ligo-cbc/pycbc.git
+RUN cd pycbc && python setup.py install
 
 WORKDIR /workspace
 RUN cd /workspace
