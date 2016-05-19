@@ -49,19 +49,14 @@ RUN wget http://software.ligo.org/lscsoft/source/lalsuite/lal-6.16.0.tar.xz && t
 RUN mv lal-6.16.0 lalsuite
 RUN cd lalsuite && ./configure --prefix=${LALSUITE_PREFIX} --enable-swig-python && make && make install
 
-RUN chmod +x ${LALSUITE_PREFIX}/etc/lal-user-env.sh 
-RUN ${LALSUITE_PREFIX}/etc/lal-user-env.sh 
-RUN echo $PYTHON_PATH
-
+RUN echo ". ${LALSUITE_PREFIX}/etc/lal-user-env.sh " >> /etc/profile.d/custom.sh
 ENV PKG_CONFIG_PATH ${LALSUITE_PREFIX}/lib/pkgconfig
 
 ## lalsimulation
 RUN wget http://software.ligo.org/lscsoft/source/lalsuite/lalsimulation-1.5.0.tar.xz && tar xvfJ lalsimulation-1.5.0.tar.xz
 RUN cd lalsimulation-1.5.0 && ./configure --prefix=$LSCSOFT_PREFIX/lalsimulation --enable-swig-python && make && make install
 
-RUN chmod +x ${LSCSOFT_PREFIX}/lalsimulation/etc/lalsimulation-user-env.sh
-RUN ${LSCSOFT_PREFIX}/lalsimulation/etc/lalsimulation-user-env.sh
-
+RUN echo ". ${LSCSOFT_PREFIX}/lalsimulation/etc/lalsimulation-user-env.sh" >> /etc/profile.d/custom.sh
 ENV PKG_CONFIG_PATH ${PKG_CONFIG_PATH}:${LSCSOFT_PREFIX}/lalsimulation/lib/pkgconfig
 
 ## PyCBC
