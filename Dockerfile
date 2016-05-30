@@ -18,6 +18,7 @@ RUN yum install -y eigen3-devel glog-devel gflags-devel bc
 RUN yum install -y libtool
 RUN yum install -y pygtk2-devel pcre-devel
 RUN yum install -y hdf5 hdf5-devel
+RUN yum install -y emacs
 
 RUN pip install --upgrade pip
 RUN pip install gcovr
