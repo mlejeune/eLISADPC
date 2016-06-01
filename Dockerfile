@@ -26,7 +26,6 @@ RUN pip install mkdocs
 RUN pip install h5py scipy
 
 ENV CXX c++
-USER root
 
 # install libcmaes
 RUN git clone https://github.com/beniz/libcmaes.git
